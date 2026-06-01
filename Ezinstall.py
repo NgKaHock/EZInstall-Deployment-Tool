@@ -31,14 +31,16 @@ apps ={
 
     "Click Share":{"type":"exe", 
                    "path":"Installer/ClickShare.exe", 
+                   "args": ["/S"], 
                    "logo":"image/ClickShare.png"},  #Company Stuff
 
     "Eshare" :{"type":"winget", 
                "id":"EShare.EShare", 
                "logo":"image/Eshare.png"},
 
-    "Forticlient":{"type":"winget", 
-                   "id":"9WZDNCRDH6MC", 
+    "Forticlient":{"type":"exe",  
+                   "path":"Installer/FortiClientInstaller.exe", 
+                   "args": ["/quiet", "/norestart"], 
                    "logo":"image/Forticlient.png"},
 
     "MoM Smart Client Printer":{"type":"msi", 
@@ -50,7 +52,7 @@ apps ={
                               "logo":"image/Sogou.png"},
 
     "Microsoft Teams":{"type":"winget", 
-                       "id":"XP8BT8DW290MPQ", 
+                       "id":"Microsoft.Teams.Free", 
                        "logo":"image/Microsoft Teams.png"},
 
     "Team Viewer":{"type":"winget", 
@@ -59,10 +61,12 @@ apps ={
 
     "Office LTSC Standard Installer":{"type":"exe", 
                                       "path":"Install/setup.exe", 
+                                      "args": ["/configure configuration.xml"], 
                                       "logo":"image/Office L.png"},  #Company Stuff
 
-    "Whatsapp":{"type":"winget", 
-                "id":"9NKSQGP7F2NH", 
+    "Whatsapp":{"type":"exe",  
+                "path":"Installer/WhatsAppInstaller.exe",
+                "args": ["/S"], 
                 "logo":"image/Whatsapp.png"},
 
     "Wechat":{"type":"winget", 
@@ -70,7 +74,7 @@ apps ={
               "logo":"image/Wechat.png"},
 
     "Visual Studio Code":{"type":"winget", 
-                          "id":"XP9KHM4BK9FZ7Q", 
+                          "id":"Microsoft.VisualStudioCode", 
                           "logo":"image/Visual Studio Code.jpg"}
 }
 # 存 check box
