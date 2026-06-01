@@ -77,10 +77,14 @@ apps ={
                           "id":"Microsoft.VisualStudioCode", 
                           "logo":"image/Visual Studio Code.jpg"}
 }
+
+preset = {
+    "New laptop" : ["Chrome", "Acrobat", "Anydesk", "Click Share", "Eshare", "Forticlient", "MoM Smart Client Printer", "Sogou Mandirn Keyboard", "Microsoft Teams", "Team Viewer", "Office LTSC Standard Installer"],
+
+}
+
 # 存 check box
 checkboxes={}
-
-
 
 
 # title
@@ -153,9 +157,30 @@ for index,(app_name, app_info) in enumerate(apps.items()):
 
     checkboxes[app_name] = checkbox
 
+def set_ui_state(state:bool):
+
+    for cb in checkboxes.values():
+        cb.configure(state="disabled" if not state else "normal") 
+
+    select_button.configure(state="disabled" if not state else "normal")
+    deselect_button.configure(state="disabled" if not state else "normal")
+    preset_button.configure(state="disabled" if not state else "normal")
+    install_button.configure(state="disabled" if not state else "normal")
+
+# preset dropdown
+def apply_preset(preset_name):
+
+    for cb in checkboxes.values():
+        cb.deselect()
+
+    # choose the apps in the preset
+    for app_name in preset[preset_name]:
+        if app_name in checkboxes:
+            checkboxes[app_name].select()
+
+        write_log(f"Preset applied : {preset_name}")
+
 # log function
-
-
 def write_log(msg):
     def _write():
 
@@ -174,7 +199,7 @@ def write_log(msg):
 def install():
 
     def run():
-
+        app.after(0, lambda: set_ui_state(False))
         app.after(0, lambda: write_log("Starting installation....."))
 
         selected_apps = []
@@ -241,15 +266,17 @@ def install():
                 app.after(0,lambda v=progress_value: progress.set(v))
 
                 app.after(0,lambda: write_log(f"{app_name} installed successfully!"))
+        app.after(0, lambda: write_log("Installation completed!"))
+        app.after(0, lambda: set_ui_state(True))
 
     threading.Thread(target=run,daemon=True).start()
+
 
 # button 
 button_frame = ctk.CTkFrame(app)
 button_frame.pack(pady=15)
 
 # select all
-
 def select_all():
 
     for checkbox in checkboxes.values():
@@ -274,6 +301,15 @@ deselect_button = ctk.CTkButton(
     command=lambda: threading.Thread(target=deselect_all).start() 
 )
 deselect_button.pack(side='left', padx=5)
+
+# preset button
+
+preset_button = ctk.CTkButton(
+    button_frame,
+    text = "New laptop preset",
+    command=lambda: apply_preset("New Laptop")
+)
+preset_button.pack(side="left", padx=5)
 
 install_button = ctk.CTkButton(
     app, 
