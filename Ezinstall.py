@@ -80,36 +80,8 @@ apps ={
 # 存 check box
 checkboxes={}
 
-log_window = None
-log_box= None
 
-def open_log_window():
-    global log_window, log_box
 
-    if log_window is not None and log_window.winfo_exists():
-        log_window.focus()
-        return
-    
-    log_window= ctk.CTkToplevel(app)
-    log_window.title("Installation Log")
-    log_window.geometry("700x400")
-
-    title = ctk.CTkLabel(
-        log_window,
-        text="Installation Log",
-        font=("Segoe UI",20,"bold")
-    )
-
-    title.pack(pady=10)
-
-    log_box = ctk.CTkTextbox(
-        log_window,
-        width = 650,
-        height = 300,
-        font = ("Consolas", 12)
-    )
-
-    log_box.pack(padx=20, pady=10)
 
 # title
 title = ctk.CTkLabel(
@@ -230,8 +202,14 @@ def install():
                         )
                     # EXE
                     elif app_info["type"] == "exe":
+
+                        cmd = [app_info["path"]]
+
+                        if "args" in app_info:
+                            cmd.extend(app_info["args"])
+
                         result=subprocess.run(
-                            [app_info["path"]],
+                            cmd,
                             capture_output=True,
                             text=True,
                             shell=True
@@ -306,12 +284,13 @@ install_button = ctk.CTkButton(
 )
 install_button.pack(pady=10)
 
-view_log_button = ctk.CTkButton(
+log_box = ctk.CTkTextbox(
     app,
-    text="View Log",
-    command = open_log_window
+    width=650,
+    height=150,
+    font=("Consolas", 12)
 )
+log_box.pack(pady=10)
 
-view_log_button.pack(pady=5)
 
 app.mainloop()
