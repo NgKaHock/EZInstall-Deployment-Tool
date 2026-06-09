@@ -221,6 +221,7 @@ def install():
                     if app_info["type"]== "winget":
                         result=subprocess.run(
                             ["winget", "install", app_info["id"], "-e"],
+                            input="Y\n",
                             capture_output=True,
                             text=True,
                             shell=True
@@ -236,6 +237,7 @@ def install():
                         result=subprocess.run(
                             cmd,
                             capture_output=True,
+                            input="Y\n",
                             text=True,
                             shell=True
                         )
@@ -248,6 +250,7 @@ def install():
                                 "/qn"
                             ],
                             capture_output=True,
+                            input="Y\n",
                             text=True,
                             shell=True
                         )
