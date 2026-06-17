@@ -22,8 +22,21 @@ The goal of this project is to reduce time spent on manual software installation
 * PyInstaller
 * CustomTkinter / Tkinter (if applicable)
 
+
 ## 🧩 Key Highlights
 
 * Focus on automation and usability
 * Designed for practical real-world use
 * Lightweight and easy to extend
+
+* ## 📸 Demo Preview
+
+### 🖥️ Main Interface
+<img width="960" height="600" alt="menu" src="https://github.com/user-attachments/assets/b335488e-9331-485d-8942-d305bcead7ff" />
+
+
+### ⚙️ Installation Process
+<img width="960" height="600" alt="progress bar demo" src="https://github.com/user-attachments/assets/b6ebbfcc-c392-4673-afa7-87494f79bce1" />
+
+### ✅ Installation Result
+<img width="960" height="600" alt="log demo" src="https://github.com/user-attachments/assets/ae342ea0-1e0e-4aff-bb87-3ec5a3f331f2" />
