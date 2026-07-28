@@ -1,4 +1,5 @@
-from os import path
+
+from importlib.resources import path
 from unittest import result
 import customtkinter as ctk
 from PIL import Image
@@ -100,15 +101,11 @@ checkboxes={}
 
 
 #map device first (solve UHC Issue)
-subprocess.run(["net", "use", "Z:", r"\\10.201.202.154\Installer\2.New Laptop Starter Pack (IT)\Ezinstall2.0  v2"],shell=True)
+subprocess.run(["net", "use", "Z:", r"\\10.201.202.154\Installer\2.New Laptop Starter Pack (IT)\Ezinstall2.0"],shell=True)
 
-# solve Office 2021 need fix path issue
-office_dir = os.path.dirname(path)
+# solve exe file fixed path issue
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-result = subprocess.run(
-    ["setup.exe","/configure","configuration-Office2021standard.xml"],
-    cwd=office_dir,
-)
 
 # title
 title = ctk.CTkLabel(
@@ -251,8 +248,8 @@ def install():
                     # EXE
                     elif app_info["type"] == "exe":
 
-                        exe_path = os.path.abspath(app_info["path"])
-
+                        exe_path = os.path.join(BASE_DIR, app_info["path"])
+                        
                         result=subprocess.run(
                             [
                                 exe_path,
