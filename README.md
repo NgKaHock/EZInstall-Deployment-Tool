@@ -20,7 +20,7 @@ The goal of this project is to reduce time spent on manual software installation
 
 * Python
 * PyInstaller
-* CustomTkinter / Tkinter (if applicable)
+* CustomTkinter / Tkinter
 
 
 ## 🧩 Key Highlights
