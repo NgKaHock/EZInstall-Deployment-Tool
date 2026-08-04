@@ -1,23 +1,26 @@
-
-from importlib.resources import path
-from unittest import result
 import customtkinter as ctk
 from PIL import Image
 import subprocess
 import tkinter as tk
 import threading
 import os 
+import sys
 
-
-#OPTIMISE LIST
-
-# add wecom,printer,whatsapp
 
 
 #theme
 ctk.set_appearance_mode("dark") 
 ctk.set_default_color_theme("blue")  
 
+def resource_path(relative_path):
+    try:
+        # PyInstaller temporary folder
+        base_path = sys._MEIPASS
+    except AttributeError:
+        # Normal python execution
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 #Window setup
 app = ctk.CTk()
@@ -101,10 +104,13 @@ checkboxes={}
 
 
 #map device first (solve UHC Issue)
-subprocess.run(["net", "use", "Z:", r"\\10.201.202.154\Installer\2.New Laptop Starter Pack (IT)\Ezinstall2.0"],shell=True)
+subprocess.run(["net", "use", "Z:", r"\\10.201.202.154\Installer\2.New Laptop Starter Pack (IT)\Ezinstall2.0"])
 
 # solve exe file fixed path issue
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if getattr(sys, 'frozen', False):
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # title
@@ -131,8 +137,8 @@ progress.set(0)
 #frame
 scroll_frame = ctk.CTkScrollableFrame(
     app,
-    width=1200,
-    height=600
+    width=500,
+    height=300
     )
 scroll_frame.pack( pady=10)
 
@@ -156,10 +162,9 @@ for index,(app_name, app_info) in enumerate(apps.items()):
     )
 
     image = ctk.CTkImage(
-        light_image = Image.open(app_info["logo"]),
+        light_image = Image.open(resource_path(app_info["logo"])),
         size = (35,35)
     )
-
     logo=ctk.CTkLabel(
         card, 
         image=image,
