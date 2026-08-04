@@ -19,8 +19,10 @@ The goal of this project is to reduce time spent on manual software installation
 ## 💻 Tech Stack
 
 * Python
-* PyInstaller
+* PyInstaller Packing Technique (python -m PyInstaller EZinstall.spec --clean)
 * CustomTkinter / Tkinter
+* Powershell Command
+
 
 
 ## 🧩 Key Highlights
